@@ -4,22 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Divto</title>
-    <script type="text/javascript" src="divto.js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css" media="all">
 </head>
 <body class="container">
         <div class="inputBox">
-            <br/><input type="text" placeholder="grid-columns" id="columns"/><br/>   
-            <br/><input type="text" placeholder="grid-rows" id="rows"/><br/>   
-            <br/><input type="text" placeholder="background-color" id="bcolor"/><br/>
-            <br/><textarea placeholder="a b" class="areas" id="areas"></textarea><br/>
-            <br/><select><option>a</option></select>
-            <input type="text" placeholder="background-color" id="bcolor1"/><br/>
-            <br/><button class="submit" id="button" onclick="Render();">Submit</button>
+            <p>Grid Generator</p>
+            <input type="text" id="col" placeholder="columns">
+            <br/>
+            <input type="text" id="row" placeholder="rows">
+            <br/>
+            <button onclick="render()">Submit</button>
+            <br/><br/>
+            <textarea id="renderGridArea" placeholder="grid-template-areas"></textarea>
+            <br/><br/>
+            <select id="div" ></select><select id="attribute" ></select>
+            <br/>
+            <input type="text" id="backgroundColor" placeholder="background-color">
+            <br/>
+            <button onclick="setAttribute()">Customize</button>
         </div>
-        <div class="renderBox">
-            <textarea type= "textarea" class="output" placeholder="Submit to see css" id="output"></textarea>
-        </div>
-        <div class="previewBox" id="previewBox"></div>
+        <style id="renderStyle"></style>
+        <div class="renderBox" id="renderBox"></div>
 </body>
 </html>
