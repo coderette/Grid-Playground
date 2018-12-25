@@ -10,13 +10,16 @@ var styles = {};
 var rows = "";
 
 
-
+function itworks() {
+    alert("it works!");
+}
 
 
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
     uniqueDivs = col * row;
+    alert(col);
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
     for(var i=0; i<uniqueDivs; i++) {
