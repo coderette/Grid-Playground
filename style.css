@@ -1,0 +1,58 @@
+*
+{
+    box-sizing: border-box;
+}
+
+html
+{
+    height: 100%;
+}
+
+body
+{
+    min-height: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+        "i p"
+        "r p";
+}
+
+
+.inputBox {
+    background-color: aquamarine;
+    grid-area: i;
+    text-align: center;
+    
+}
+
+.renderBox {
+    grid-area: r;
+    text-align: left;
+    
+}
+
+.output {
+    border: none;
+    margin: 0px;
+    padding: none;
+    width: 100%;
+    height: 100%;
+    background-color: beige
+}
+
+.previewBox {
+    grid-area: p;
+    display: grid;
+    background-color: rgb(253, 253, 253);
+}
+

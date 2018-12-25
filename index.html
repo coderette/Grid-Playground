@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Divto</title>
+    <script type="text/javascript" src="divto.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css" media="all">
+</head>
+<body class="container">
+        <div class="inputBox">
+            <br/><input type="text" placeholder="grid-columns" id="columns"/><br/>   
+            <br/><input type="text" placeholder="grid-rows" id="rows"/><br/>   
+            <br/><input type="text" placeholder="background-color" id="bcolor"/><br/>
+            <br/><textarea placeholder="a b" class="areas" id="areas"></textarea><br/>
+            <br/><select><option>a</option></select>
+            <input type="text" placeholder="background-color" id="bcolor1"/><br/>
+            <br/><button class="submit" id="button" onclick="Render();">Submit</button>
+        </div>
+        <div class="renderBox">
+            <textarea type= "textarea" class="output" placeholder="Submit to see css" id="output"></textarea>
+        </div>
+        <div class="previewBox" id="previewBox"></div>
+</body>
+</html>
