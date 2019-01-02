@@ -23,7 +23,7 @@ body
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-        "i r";
+        'i r';
 }
 
 .inputBox {

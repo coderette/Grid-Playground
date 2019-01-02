@@ -4,8 +4,8 @@ var uniqueDivs = 0;
 var renderDiv = document.getElementById("renderBox");
 var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var color = ["red", "orange", "yellow", "green", "teal", "blue", "indigo", "violet", "purple", "silver", "gray", "black", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var styleType = ["grid-area", "background-color", "color"]
-var values = [["a","yellow"], ["b","blue"], ["c", "green"], ["d", "red"]];
+var styleType = ["grid-area", "background-color"]
+// var values = [["a","yellow"], ["b","blue"], ["c", "green"], ["d", "red"]];
 var styles = {};
 var rows = "";
 
@@ -15,7 +15,8 @@ function itworks() {
     alert("it works!");
 }
 
-
+//how to fill nested objects using loops
+//<style id="renderStyle">div.id{attribute1: value1; attribute2: value2;}</style>
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
@@ -28,10 +29,17 @@ function render() {
     }   
     for(var i=0; i<uniqueDivs; i++) {
         var attributes = {};
-        attributes["background-color"] = color[i];
+        for(var j=0; j<styleType.length; j++) {
+            if (j==0) {
+                attributes[styleType[j]] = letter[i];
+            }
+            else if (j==1) {
+                attributes[styleType[j]] = color[i];
+            };
+        }
         styles[letter[i]] = attributes;
     } 
-    
+    //alert(JSON.stringify(styles));
     setGridArea();
     setStyle();
     setAttribute();
@@ -42,21 +50,35 @@ function render() {
 function setStyle() {
     rows = get("renderGridArea").value;
     var gridArea = gridAreas(rows);
-    alert(gridArea);
+    //alert(gridArea);
     var renderStyle = get("renderStyle");
-    renderStyle.innerHTML = "div.renderBox{display: grid; grid-template-columns: auto; grid-template-rows: auto" + gridArea + "}";
-    for (let key in styles) {
-        var attribute = styles[key];
-        for (let key2 in attribute) {
-            var style = setStyleTag(key, key2, attribute[key2]);
-            renderStyle.innerHTML += style;
-        }
-    }
+    renderStyle.innerHTML = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
+    renderStyle.innerHTML += divStyle();
 }
 
 
-function setAttribute() {
-    alert("hi");
+function divStyle() {
+    var start = "    \ndiv.";
+    var middle = "{    \n";
+    var end = "\n}";
+    var divStyles = "";
+    for (let key in styles) {
+        var attribute = styles[key];
+        var attributes = "";
+        for (let key2 in attribute) { 
+            var style = setAttribute(key2, attribute[key2]);
+            attributes += style;
+        }        
+        var content = start + key + middle + attributes + end;
+        divStyles += content;
+    }
+    return divStyles;
+}
+
+
+
+function setCustomAttribute() {
+    //alert("hi");
     var color = document.getElementById("backgroundColor").value;
     var divClass = document.getElementById("options").value;
     var divAttribute = document.getElementById("attribute").value;
@@ -72,8 +94,8 @@ function setGridArea() {
     rows = "";
 
     for(var i=0; i<row; i++) {
-        var newLine = "\n    ";
-        var rowLine = "'";
+        var newLine = "\n";
+        var rowLine = "";
         for(var j=0; j<col; j++) {
             if (j+1!= col) {
             rowLine += letter[count] + " ";
@@ -81,12 +103,12 @@ function setGridArea() {
             else {rowLine += letter[count]; }
             count++
         } 
-        rowLine += "'";
+        rowLine += "";
         rowText[i] = rowLine;
     } 
     for (var i=0; i<row; i++) {
         if (i==0) {
-            rows = "    " + rowText[i]; 
+            rows = "" + rowText[i]; 
         }
         else {rows += newLine + rowText[i]}
          
@@ -95,7 +117,6 @@ function setGridArea() {
 }
 
 function gridAreas(rows) {
-    var gridRows = "";
     var startGridArea = "grid-template-areas:\n";
     var endGridArea = "; ";
     var wholeGridArea = startGridArea + rows + endGridArea;
@@ -106,17 +127,14 @@ function fillOptions() {
     var div = get("div");
     var divAttribute = get("attribute");
     div.innerHTML = "";
+    divAttribute.innerHTML = "";
     for (let key in styles) {
+        var content = createTagContent("option", key);
+        div.innerHTML += content;
     }
-    for (let key in styles) {
-        var attribute = styles[key];
-        for (let key2 in attribute) {
-            var content = createTagContent("option", key);
-            div.innerHTML += content;
-            
-            content = createTagContent("option", key2);
-            divAttribute.innerHTML = content;
-        }
+    for (let key in styleType) {
+        content = createTagContent("option", styleType[key]);
+        divAttribute.innerHTML += content;
     }
 }
 
@@ -180,6 +198,7 @@ function setStyleTag(name, attribute, value) {
     var tagStyle = style(attribute, value);
     var end = "}"
     var styleWhole = start + name + middle + tagStyle + end;
+    alert(styleWhole);
     return styleWhole;
 }
 
