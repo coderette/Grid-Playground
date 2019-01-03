@@ -36,3 +36,12 @@ body
     grid-area: r;
     background-color: aquamarine;
 }
+
+textarea {
+    width: 120px;
+    height: fit-content;
+}
+
+.row, .col {
+    width: 120px;
+}

@@ -20,40 +20,43 @@ function itworks() {
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
-    uniqueDivs = col * row;
+    uniqueDivs = uniqueDivsFun();
+    //alert(uniqueDivs)
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
-    for(var i=0; i<uniqueDivs; i++) {
-        var content = createDiv(letter[i]);
+    for(var i=1; i<uniqueDivs+1; i++) {
+        var content = createDiv(i);
         renderDiv.innerHTML += content;
     }   
-    for(var i=0; i<uniqueDivs; i++) {
+    for(var i=1; i<uniqueDivs+1; i++) {
         var attributes = {};
         for(var j=0; j<styleType.length; j++) {
             if (j==0) {
-                attributes[styleType[j]] = letter[i];
+                attributes[styleType[j]] = letter[i-1];
             }
             else if (j==1) {
-                attributes[styleType[j]] = color[i];
+                attributes[styleType[j]] = color[i-1];
             };
         }
-        styles[letter[i]] = attributes;
+        styles["a"+i] = attributes;
     } 
     //alert(JSON.stringify(styles));
-    setGridArea();
+    //setGridArea();
     setStyle();
-    setAttribute();
+    //setAttribute();
     fillOptions();
 }
 
 
 function setStyle() {
-    rows = get("renderGridArea").value;
     var gridArea = gridAreas(rows);
     //alert(gridArea);
     var renderStyle = get("renderStyle");
-    renderStyle.innerHTML = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
-    renderStyle.innerHTML += divStyle();
+    var content = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
+    var fullContent = content + divStyle();
+    renderStyle.innerHTML = fullContent;
+    
+    alert(renderStyle.innerHTML);
 }
 
 
@@ -119,8 +122,78 @@ function setGridArea() {
 function gridAreas(rows) {
     var startGridArea = "grid-template-areas:\n";
     var endGridArea = "; ";
-    var wholeGridArea = startGridArea + rows + endGridArea;
+    var grid = "";
+    var newRow = rows.split("\n");
+    for (let line in newRow) {
+        if(line!=row.length-1) {
+            grid += "    " + "'" + newRow[line] + "'\n";
+        }
+        else {
+            grid += "    " + "'" + newRow[line] + "'";
+        }
+    }
+    var wholeGridArea = startGridArea + grid + endGridArea;
     return wholeGridArea;
+}
+
+function uniqueDivsFun() {
+    var renderGridArea = get("renderGridArea");
+    //alert(renderGridArea.value);
+    if (renderGridArea.value=="") {
+        var newUniqueDivs = col * row;
+        //alert(newUniqueDivs);
+        setGridArea();
+        renderGridArea.value = rows;
+
+    }
+    else {
+        rows = renderGridArea.value;
+        gridAreas(rows);
+        var bRow = rows.split("\n");
+        var uniqueDivLetters = [];
+        var letters = [];
+        var rowLine = "";
+        for (let line in bRow) {
+            rowLine = bRow[line].split(" ");
+            for (let lette in rowLine) {
+                letters.push(rowLine[lette]); 
+            }
+        }
+        alert(letters);
+        for (let letter in letters) {
+            var uniqueLetter = letters[letter];
+            var double = 0;
+            var exists = false;
+            for (let character in letters) {
+                if (uniqueLetter == letters[character]) {                    
+                    double++;
+                }
+            }
+            if (double<2) {
+                uniqueDivLetters.push(uniqueLetter);
+            }
+            if (double>=2) {
+                for (let isin in uniqueDivLetters) {
+                    if (uniqueLetter == uniqueDivLetters[isin]) {
+                        exists = true;
+                    }
+                }
+                if (exists==false) {
+                    uniqueDivLetters.push(uniqueLetter);
+                }
+            }
+            double = 0;
+        }
+        letter = uniqueDivLetters.sort();
+        newUniqueDivs = uniqueDivLetters.length;
+    }
+    alert(newUniqueDivs)
+    return newUniqueDivs;
+}
+
+function clearText() {
+    var renderGridArea = get("renderGridArea");
+    renderGridArea.value = "";
 }
 
 function fillOptions() {
@@ -175,7 +248,7 @@ function createTagContent(type, content) {
 
 
 function createDiv(name) {
-    var tagStart = "<div class='";
+    var tagStart = "<div class='a";
     var tagId = "' id='";
     var tagEnd = "'></div>";
     var tagWhole = tagStart + name + tagId + name + tagEnd;
