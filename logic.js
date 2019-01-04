@@ -8,6 +8,8 @@ var styleType = ["grid-area", "background-color"]
 // var values = [["a","yellow"], ["b","blue"], ["c", "green"], ["d", "red"]];
 var styles = {};
 var rows = "";
+var textarea = false;
+var customLetters = [];
 
 var rowText = [];
 
@@ -20,23 +22,27 @@ function itworks() {
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
-    uniqueDivs = uniqueDivsFun();
-    //alert(uniqueDivs)
+    uniqueDivs = uniqueDivsFun().length;
+    alert(uniqueDivs)
+    var alphabets = [];
+    alphabets = uniqueDivsFun();
+    alert(alphabets)
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
-    for(var i=1; i<uniqueDivs+1; i++) {
+    for(var i=0; i<uniqueDivs; i++) {
         var content = createDiv(i);
         renderDiv.innerHTML += content;
     }   
-    for(var i=1; i<uniqueDivs+1; i++) {
+    for(var i=0; i<uniqueDivs; i++) {
         var attributes = {};
         for(var j=0; j<styleType.length; j++) {
             if (j==0) {
-                attributes[styleType[j]] = letter[i-1];
+                attributes[styleType[j]] = alphabets[i];
             }
             else if (j==1) {
-                attributes[styleType[j]] = color[i-1];
+                attributes[styleType[j]] = color[i];
             };
+            //alert(JSON.stringify(styles));
         }
         styles["a"+i] = attributes;
     } 
@@ -138,19 +144,23 @@ function gridAreas(rows) {
 
 function uniqueDivsFun() {
     var renderGridArea = get("renderGridArea");
+    var uniqueDivLetters = [];
     //alert(renderGridArea.value);
     if (renderGridArea.value=="") {
         var newUniqueDivs = col * row;
-        //alert(newUniqueDivs);
+        //alert(uniqueDivLetters);
         setGridArea();
-        renderGridArea.value = rows;
-
+        renderGridArea.value = rows;        
+        textarea = false;
+        for (let i = 0; i<newUniqueDivs; i++) {
+            uniqueDivLetters += letter[i];
+        }
     }
     else {
         rows = renderGridArea.value;
+        //alert(rows)
         gridAreas(rows);
         var bRow = rows.split("\n");
-        var uniqueDivLetters = [];
         var letters = [];
         var rowLine = "";
         for (let line in bRow) {
@@ -159,7 +169,7 @@ function uniqueDivsFun() {
                 letters.push(rowLine[lette]); 
             }
         }
-        alert(letters);
+        //alert(letters);
         for (let letter in letters) {
             var uniqueLetter = letters[letter];
             var double = 0;
@@ -183,12 +193,14 @@ function uniqueDivsFun() {
                 }
             }
             double = 0;
+            textarea = true;
         }
-        letter = uniqueDivLetters.sort();
+        uniqueDivLetters.sort();
         newUniqueDivs = uniqueDivLetters.length;
     }
-    alert(newUniqueDivs)
-    return newUniqueDivs;
+    //alert(newUniqueDivs)
+    //alert(uniqueDivLetters)
+    return uniqueDivLetters;
 }
 
 function clearText() {
