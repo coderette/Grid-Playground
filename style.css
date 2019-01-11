@@ -8,7 +8,7 @@ html
     height: 100%;
 }
 
-body
+body 
 {
     min-height: 100%;
     height: 100%;
@@ -18,30 +18,70 @@ body
 }
 
 
-.container {
+.mainContainer {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-        'i r';
+        's r';
+}
+
+
+.sidebar {
+    grid-area: s;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        'i'
+        'c';
 }
 
 .inputBox {
     grid-area: i;
     text-align: center;
-    margin: 10px;
+    margin: 15px;
 }
 
-.renderBox {
+.codeOutput {
+    grid-area: c;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        't'
+        'b';
+}
+
+.container {
     grid-area: r;
     background-color: aquamarine;
 }
 
-textarea {
+.renderGridArea {
     width: 120px;
     height: fit-content;                
 }
 
+.codeOutputArea {
+    width: 100%;
+    height: 99.5%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.title {
+    grid-area: t;
+}
+
+.box {
+    grid-area: b;
+}
+
 .row, .col {
-    width: 120px;
+    width: 100px;
+}
+
+p {
+    text-align: center;
 }

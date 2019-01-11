@@ -1,22 +1,24 @@
 var col = 0;
 var row = 0;
 var uniqueDivs = 0;
-var renderDiv = document.getElementById("renderBox");
+var renderDiv = document.getElementById("container");
 var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "za", "zb", "zc", "zd", "ze", "zf", "zg", "zh", "zi", "zj", "zk", "zl", "zm", "zn", "zo", "zp", "zq", "zr", "zs", "zt", "zu", "zv", "zw", "zx", "zy", "zz"];
 var color = ["red", "orange", "yellow", "green", "teal", "blue", "indigo", "violet", "purple", "silver", "gray", "black", "navy", "blueviolet", "darksalmon", "brown", "chocolate", "coral", "magenta", "crimson", "darkcyan", "darkgoldenrod", "darkorchid", "forestgreen", "dodgerblue", "darkred", "gold", "darkgreen", "darkblue", "darkmagenta", "darkolivegreen", "deeppink", "deepskyblue", "lightyellow", "lightgreen", "lightblue", "palegreen", "palevioletred", "peru", "saddlebrown", "salmon", "seagreen", "skyblue", "beige", "burlywood", "chartreuse", "darkkhaki", "firebrick", "darkslateblue", "hotpink", "khaki", "lime", "royalblue", "midnightblue"];
 var styleType = ["grid-area", "background-color"]
 var styles = {};
+var style = "";
 var rows = "";
 var customLetters = [];
 var rowText = [];
 var alphabet = [];
 
 function render() {
+    styles = {};
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
     uniqueDivs = uniqueDivsFun().length;
     alphabet = uniqueDivsFun();
-    var renderDiv = get("renderBox");
+    var renderDiv = get("container");
     renderDiv.innerHTML = "";
     for(var i=0; i<uniqueDivs; i++) {
         var content = createDiv(alphabet[i]);
@@ -38,33 +40,36 @@ function render() {
     setStyle();
     //setAttribute();
     fillOptions();
+    renderStyle();
 }
 
 
 function setStyle() {
     var gridArea = setGridArea(rows);
-    var renderStyle = get("renderStyle");
-    var content = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
+    var renderStyleTag = get("renderStyleTag");
+    var content = "div.container{\n    display: grid;\n    grid-template-columns: auto;\n    grid-template-rows: auto;    \n    " + gridArea + "}";
     var fullContent = content + divStyle();
-    renderStyle.innerHTML = fullContent;
+    style = fullContent;
+    renderStyleTag.innerHTML = fullContent;
 }
 
 
 function divStyle() {
-    var start = "    \ndiv.";
-    var middle = "{    \n";
+    var start = "\ndiv.";
+    var middle = "{\n    ";
     var end = "\n}";
     var divStyles = "";
     for (let key in styles) {
         var attribute = styles[key];
         var attributes = "";
         for (let key2 in attribute) { 
-            var style = setAttribute(key2, attribute[key2]);
-            attributes += style;
+            var styleDiv = setAttribute(key2, attribute[key2]);
+            attributes += styleDiv + "\n    ";
         }        
         var content = start + key + middle + attributes + end;
         divStyles += content;
     }
+    
     return divStyles;
 }
 
@@ -196,19 +201,14 @@ function changeColor() {
         m["background-color"] = newColor;
     }
     setStyle();
+    renderStyle();
 }
 
 
-
-function setCustomAttribute() {
-    var color = document.getElementById("backgroundColor").value;
-    var divClass = document.getElementById("options").value;
-    var divAttribute = document.getElementById("attribute").value;
-    var attributes = styles[divClass];
-    attributes[divAttribute] =  color;
-    setStyle();
+function renderStyle() {
+    var codeOutput = get("codeOutputArea");
+    codeOutput.innerHTML = style;
 }
-
 
 
 function get(name) {

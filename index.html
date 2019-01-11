@@ -7,7 +7,8 @@
     <script type="text/javascript" src="logic.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css" media="all">
 </head>
-<body class="container">
+<body class="mainContainer">
+    <div class="sidebar">
         <div class="inputBox">
             <p>Grid Generator</p>
             <input type="text" class="col" id="col" placeholder="columns">
@@ -16,7 +17,7 @@
             <br/>
             <button onclick="render()">Submit</button>
             <br/><br/>
-            <textarea id="renderGridArea" ></textarea>
+            <textarea id="renderGridArea" class="renderGridArea" ></textarea>
             <br/>
             <button onclick="render()">Customize</button><button onclick="clearText()">Clear</button>
             <br/><br/>
@@ -25,7 +26,12 @@
             <br/>
             <button onclick="changeColor()">Customize</button>
         </div>
-        <style id="renderStyle"></style>
-        <div class="renderBox" id="renderBox"></div>
+        <div class="codeOutput">
+            <div class="title"><p>Generated CSS</p></div>
+            <div class="box"><textarea id="codeOutputArea" class="codeOutputArea"></textarea></div>
+        </div>
+    </div>
+    <style id="renderStyleTag"></style>
+    <div class="container" id="container"></div>
 </body>
 </html>
