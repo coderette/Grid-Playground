@@ -2,20 +2,14 @@ var col = 0;
 var row = 0;
 var uniqueDivs = 0;
 var renderDiv = document.getElementById("renderBox");
-var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var color = ["red", "orange", "yellow", "green", "teal", "blue", "indigo", "violet", "purple", "silver", "gray", "black", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "za", "zb", "zc", "zd", "ze", "zf", "zg", "zh", "zi", "zj", "zk", "zl", "zm", "zn", "zo", "zp", "zq", "zr", "zs", "zt", "zu", "zv", "zw", "zx", "zy", "zz"];
+var color = ["red", "orange", "yellow", "green", "teal", "blue", "indigo", "violet", "purple", "silver", "gray", "black", "navy", "blueviolet", "darksalmon", "brown", "chocolate", "coral", "magenta", "crimson", "darkcyan", "darkgoldenrod", "darkorchid", "forestgreen", "dodgerblue", "darkred", "gold", "darkgreen", "darkblue", "darkmagenta", "darkolivegreen", "deeppink", "deepskyblue", "lightyellow", "lightgreen", "lightblue", "palegreen", "palevioletred", "peru", "saddlebrown", "salmon", "seagreen", "skyblue", "beige", "burlywood", "chartreuse", "darkkhaki", "firebrick", "darkslateblue", "hotpink", "khaki", "lime", "royalblue", "midnightblue"];
 var styleType = ["grid-area", "background-color"]
-// var values = [["a","yellow"], ["b","blue"], ["c", "green"], ["d", "red"]];
 var styles = {};
 var rows = "";
-var textarea = false;
 var customLetters = [];
 
 var rowText = [];
-
-function itworks() {
-    alert("it works!");
-}
 
 //how to fill nested objects using loops
 //<style id="renderStyle">div.id{attribute1: value1; attribute2: value2;}</style>
@@ -26,7 +20,7 @@ function render() {
     alert(uniqueDivs)
     var alphabets = [];
     alphabets = uniqueDivsFun();
-    alert(alphabets)
+    //alert(alphabets)
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
     for(var i=0; i<uniqueDivs; i++) {
@@ -46,7 +40,7 @@ function render() {
         }
         styles["a"+i] = attributes;
     } 
-    //alert(JSON.stringify(styles));
+    alert(JSON.stringify(styles));
     //setGridArea();
     setStyle();
     //setAttribute();
@@ -81,6 +75,7 @@ function divStyle() {
         var content = start + key + middle + attributes + end;
         divStyles += content;
     }
+    //alert(divStyles)
     return divStyles;
 }
 
@@ -122,7 +117,9 @@ function setGridArea() {
         else {rows += newLine + rowText[i]}
          
     }
-    renderGridArea.innerHTML = rows;
+    
+    
+    renderGridArea.value = rows;
 }
 
 function gridAreas(rows) {
@@ -147,14 +144,15 @@ function uniqueDivsFun() {
     var uniqueDivLetters = [];
     //alert(renderGridArea.value);
     if (renderGridArea.value=="") {
+        uniqueDivLetters = [];
         var newUniqueDivs = col * row;
-        //alert(uniqueDivLetters);
+        //alert(newUniqueDivs);
         setGridArea();
-        renderGridArea.value = rows;        
-        textarea = false;
         for (let i = 0; i<newUniqueDivs; i++) {
-            uniqueDivLetters += letter[i];
+            uniqueDivLetters.push(letter[i]);
+            //alert(uniqueDivLetters)
         }
+        
     }
     else {
         rows = renderGridArea.value;
@@ -193,7 +191,6 @@ function uniqueDivsFun() {
                 }
             }
             double = 0;
-            textarea = true;
         }
         uniqueDivLetters.sort();
         newUniqueDivs = uniqueDivLetters.length;
