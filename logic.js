@@ -36,9 +36,7 @@ function render() {
         }
         styles[alphabet[i]] = attributes;
     } 
-    alert(JSON.stringify(styles))
     setStyle();
-    //setAttribute();
     fillOptions();
     renderStyle();
 }
