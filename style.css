@@ -26,7 +26,7 @@ body
         'i r';
 }
 
-div.inputBox {
+.inputBox {
     grid-area: i;
     text-align: center;
     margin: 10px;

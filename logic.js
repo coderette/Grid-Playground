@@ -8,19 +8,14 @@ var styleType = ["grid-area", "background-color"]
 var styles = {};
 var rows = "";
 var customLetters = [];
-
 var rowText = [];
 
-//how to fill nested objects using loops
-//<style id="renderStyle">div.id{attribute1: value1; attribute2: value2;}</style>
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
     uniqueDivs = uniqueDivsFun().length;
-    alert(uniqueDivs)
     var alphabets = [];
     alphabets = uniqueDivsFun();
-    //alert(alphabets)
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
     for(var i=0; i<uniqueDivs; i++) {
@@ -36,12 +31,9 @@ function render() {
             else if (j==1) {
                 attributes[styleType[j]] = color[i];
             };
-            //alert(JSON.stringify(styles));
         }
         styles["a"+i] = attributes;
     } 
-    alert(JSON.stringify(styles));
-    //setGridArea();
     setStyle();
     //setAttribute();
     fillOptions();
@@ -50,13 +42,10 @@ function render() {
 
 function setStyle() {
     var gridArea = gridAreas(rows);
-    //alert(gridArea);
     var renderStyle = get("renderStyle");
     var content = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
     var fullContent = content + divStyle();
     renderStyle.innerHTML = fullContent;
-    
-    alert(renderStyle.innerHTML);
 }
 
 
@@ -75,20 +64,17 @@ function divStyle() {
         var content = start + key + middle + attributes + end;
         divStyles += content;
     }
-    //alert(divStyles)
     return divStyles;
 }
 
 
 
 function setCustomAttribute() {
-    //alert("hi");
     var color = document.getElementById("backgroundColor").value;
     var divClass = document.getElementById("options").value;
     var divAttribute = document.getElementById("attribute").value;
     var attributes = styles[divClass];
     attributes[divAttribute] =  color;
-    alert(JSON.stringify(styles));
     setStyle();
 }
 
@@ -110,6 +96,7 @@ function setGridArea() {
         rowLine += "";
         rowText[i] = rowLine;
     } 
+
     for (var i=0; i<row; i++) {
         if (i==0) {
             rows = "" + rowText[i]; 
@@ -117,8 +104,7 @@ function setGridArea() {
         else {rows += newLine + rowText[i]}
          
     }
-    
-    
+
     renderGridArea.value = rows;
 }
 
@@ -142,21 +128,18 @@ function gridAreas(rows) {
 function uniqueDivsFun() {
     var renderGridArea = get("renderGridArea");
     var uniqueDivLetters = [];
-    //alert(renderGridArea.value);
     if (renderGridArea.value=="") {
         uniqueDivLetters = [];
         var newUniqueDivs = col * row;
-        //alert(newUniqueDivs);
         setGridArea();
+
         for (let i = 0; i<newUniqueDivs; i++) {
             uniqueDivLetters.push(letter[i]);
-            //alert(uniqueDivLetters)
         }
         
     }
     else {
         rows = renderGridArea.value;
-        //alert(rows)
         gridAreas(rows);
         var bRow = rows.split("\n");
         var letters = [];
@@ -167,7 +150,7 @@ function uniqueDivsFun() {
                 letters.push(rowLine[lette]); 
             }
         }
-        //alert(letters);
+
         for (let letter in letters) {
             var uniqueLetter = letters[letter];
             var double = 0;
@@ -195,8 +178,6 @@ function uniqueDivsFun() {
         uniqueDivLetters.sort();
         newUniqueDivs = uniqueDivLetters.length;
     }
-    //alert(newUniqueDivs)
-    //alert(uniqueDivLetters)
     return uniqueDivLetters;
 }
 
@@ -220,29 +201,12 @@ function fillOptions() {
     }
 }
 
-//create divs
-//get style inner
-//add to style inner
 
-//<option disabled selected value></option>
-
-
-function setHTML(name, content) {
-    var value = document.getElementById(name);
-    value.innerHTML = content;
-}
 
 
 function get(name) {
     var inside = document.getElementById(name);
     return inside;
-}
-
-function generateTags(name, color) {
-    var style = createStyle(name, color);
-    var div = createDiv(name);
-    var whole = style + "\n" + div;
-    return whole;
 }
 
 
@@ -264,47 +228,6 @@ function createDiv(name) {
     return tagWhole;
 }
 
-function createStyle(name, attribute, value) {
-    var tagStart = "<style type='text/css'  id='";
-    var tagId = "Style'>"
-    var tagStyle = setStyleTag(name, attribute, value);
-    var tagEnd = "</style>";
-    var tagWhole = tagStart + name + tagId + tagStyle + tagEnd;
-    return tagWhole;
-}
-
-
-function setStyleTag(name, attribute, value) {
-    var start = "div.";
-    var middle = " {";
-    var tagStyle = style(attribute, value);
-    var end = "}"
-    var styleWhole = start + name + middle + tagStyle + end;
-    alert(styleWhole);
-    return styleWhole;
-}
-
-
-
-//CSS Madness
-
-function style(attribute, value) {
-    var width = "100%";
-    var height = "100%";
-    var attributes = setAttribute(attribute, value);
-    var size = setWidthHeight(width, height);
-    var style = attributes + size;
-    return style;
-}
-
-
-function setWidthHeight(width, height) {
-    var widthStart = "width: ";
-    var heightStart = "height: "
-    var styleEnd = "; ";
-    var styleWhole = widthStart + width + styleEnd + heightStart + height + styleEnd;
-    return styleWhole;
-}
 
 function setAttribute(attribute,value) {
     var styleMiddle = ": ";
