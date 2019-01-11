@@ -9,31 +9,32 @@ var styles = {};
 var rows = "";
 var customLetters = [];
 var rowText = [];
+var alphabet = [];
 
 function render() {
     col = parseInt(document.getElementById("col").value);
     row = parseInt(document.getElementById("row").value);
     uniqueDivs = uniqueDivsFun().length;
-    var alphabets = [];
-    alphabets = uniqueDivsFun();
+    alphabet = uniqueDivsFun();
     var renderDiv = get("renderBox");
     renderDiv.innerHTML = "";
     for(var i=0; i<uniqueDivs; i++) {
-        var content = createDiv(i);
+        var content = createDiv(alphabet[i]);
         renderDiv.innerHTML += content;
     }   
     for(var i=0; i<uniqueDivs; i++) {
         var attributes = {};
         for(var j=0; j<styleType.length; j++) {
             if (j==0) {
-                attributes[styleType[j]] = alphabets[i];
+                attributes[styleType[j]] = alphabet[i];
             }
             else if (j==1) {
                 attributes[styleType[j]] = color[i];
             };
         }
-        styles["a"+i] = attributes;
+        styles[alphabet[i]] = attributes;
     } 
+    alert(JSON.stringify(styles))
     setStyle();
     //setAttribute();
     fillOptions();
@@ -41,7 +42,7 @@ function render() {
 
 
 function setStyle() {
-    var gridArea = gridAreas(rows);
+    var gridArea = setGridArea(rows);
     var renderStyle = get("renderStyle");
     var content = "div.renderBox{    \ndisplay: grid; grid-template-columns: auto; grid-template-rows: auto; " + gridArea + "}";
     var fullContent = content + divStyle();
@@ -68,17 +69,7 @@ function divStyle() {
 }
 
 
-
-function setCustomAttribute() {
-    var color = document.getElementById("backgroundColor").value;
-    var divClass = document.getElementById("options").value;
-    var divAttribute = document.getElementById("attribute").value;
-    var attributes = styles[divClass];
-    attributes[divAttribute] =  color;
-    setStyle();
-}
-
-function setGridArea() {
+function setGridRows() {
     var renderGridArea = get("renderGridArea");
     var count = 0;
     rows = "";
@@ -108,7 +99,7 @@ function setGridArea() {
     renderGridArea.value = rows;
 }
 
-function gridAreas(rows) {
+function setGridArea(rows) {
     var startGridArea = "grid-template-areas:\n";
     var endGridArea = "; ";
     var grid = "";
@@ -131,7 +122,7 @@ function uniqueDivsFun() {
     if (renderGridArea.value=="") {
         uniqueDivLetters = [];
         var newUniqueDivs = col * row;
-        setGridArea();
+        setGridRows();
 
         for (let i = 0; i<newUniqueDivs; i++) {
             uniqueDivLetters.push(letter[i]);
@@ -140,7 +131,6 @@ function uniqueDivsFun() {
     }
     else {
         rows = renderGridArea.value;
-        gridAreas(rows);
         var bRow = rows.split("\n");
         var letters = [];
         var rowLine = "";
@@ -176,7 +166,6 @@ function uniqueDivsFun() {
             double = 0;
         }
         uniqueDivLetters.sort();
-        newUniqueDivs = uniqueDivLetters.length;
     }
     return uniqueDivLetters;
 }
@@ -188,19 +177,37 @@ function clearText() {
 
 function fillOptions() {
     var div = get("div");
-    var divAttribute = get("attribute");
     div.innerHTML = "";
-    divAttribute.innerHTML = "";
-    for (let key in styles) {
-        var content = createTagContent("option", key);
+    for (let key in alphabet) {
+        var content = createTagContent("option", alphabet[key]);
         div.innerHTML += content;
-    }
-    for (let key in styleType) {
-        content = createTagContent("option", styleType[key]);
-        divAttribute.innerHTML += content;
     }
 }
 
+function changeColor() {
+    var div = get("div").value;
+    var m = styles[div];
+    var oldColor = m["background-color"];
+    var newColor = get("backgroundColor").value;
+    if (newColor=="" || newColor=="background-color") {
+        m["background-color"] = oldColor;
+    }
+    else {
+        m["background-color"] = newColor;
+    }
+    setStyle();
+}
+
+
+
+function setCustomAttribute() {
+    var color = document.getElementById("backgroundColor").value;
+    var divClass = document.getElementById("options").value;
+    var divAttribute = document.getElementById("attribute").value;
+    var attributes = styles[divClass];
+    attributes[divAttribute] =  color;
+    setStyle();
+}
 
 
 
@@ -221,7 +228,7 @@ function createTagContent(type, content) {
 
 
 function createDiv(name) {
-    var tagStart = "<div class='a";
+    var tagStart = "<div class='";
     var tagId = "' id='";
     var tagEnd = "'></div>";
     var tagWhole = tagStart + name + tagId + name + tagEnd;
