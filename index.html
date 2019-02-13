@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Divto</title>
+    <title>Grid Playground</title>
     <script type="text/javascript" src="logic.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css" media="all">
 </head>
 <body class="mainContainer">
-    <div class="sidebar">
+    <div class="input">
+        <div class="inputTitle">Input</div>
         <div class="inputBox">
-            <div class="inputTitle">Grid Playground</div>
             <div class="introOne">Enter number of columns and rows and submit!</div>
             <div class="colrow">
                 <input type="text" class="col" id="col" placeholder="columns">
@@ -27,7 +27,7 @@
                 <button onclick="render()">Customize</button>
                 <br/>
             </div>
-            <div class="introThree">Select div and enter color to change div colors.</div>
+            <div class="introThree">Select a letter and enter color to change div colors.</div>
             <div class="divcolor">
                 <select id="div" ></select>
                 <input type="text" id="backgroundColor" placeholder="background-color">
@@ -41,7 +41,10 @@
             <div class="cssbox"><div class="outputTitle">CSS</div><textarea id="cssOutputArea" class="cssOutputArea"></textarea></div>
         </div>
     </div>
-    <style id="renderStyleTag"></style>
-    <div class="container" id="container"></div>
+    <div class="render">
+        <div class="renderTitle">Output</div>
+        <style id="renderStyleTag"></style>
+        <div class="container" id="container"></div>
+    </div>
 </body>
 </html>
