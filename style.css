@@ -20,22 +20,38 @@ body
 
 .mainContainer {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto 1fr;
     grid-template-areas: 
-        'input'
-        'render';
+        'inputTitle outputTitle'
+        'render render';
+}
+
+.render {
+    grid-area: render;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'input output';
 }
 
 
+.inputTitle, .inputTitleActive, .inputTitleInactive {
+    grid-area: inputTitle;
+}
+
+.outputTitle, .outputTitleActive {
+    grid-area: outputTitle;
+}
+
 .input {
-    background-color: rgb(240, 240, 240);
     grid-area: input;
+    background-color: rgb(240, 240, 240);
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas: 
-        'inputTitle'
         'inputBox'
         'codeOutput';
 }
@@ -54,9 +70,6 @@ body
         'introFour introFour';
 }
 
-.inputTitle {
-    grid-area: inputTitle;
-}
 
 .introOne {
     grid-area: introOne;
@@ -93,7 +106,7 @@ body
     text-align: center;
 }
 
-.outputTitle, .inputTitle, .renderTitle {
+.codeOutputTitle, .inputTitle, .outputTitle, .inputTitleActive, .outputTitleActive, .inputTitleInactive {
     font-size: 16px;
     padding: 3px;
     text-align: center;
@@ -139,19 +152,14 @@ body
     text-align: center;
 }
 
-.render {
-    grid-area: render;
+.output {
+    grid-area: output;
     background-color: rgb(240, 240, 240);
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-        'renderTitle'
         'container';
-}
-
-.renderTitle {
-    grid-area: renderTitle;
 }
 
 .container {
@@ -159,33 +167,56 @@ body
     background-color: rgb(248, 248, 248);
 }
 
-.inputTitle, .renderTitle {
+.inputTitleInactive {
+    background-color: rgb(115, 152, 161);
+    color: white;
+}
+
+.outputTitle {
+    background-color: rgb(115, 152, 161);
+    color: white;
+}
+
+.inputTitleActive, .inputTitle, .outputTitleActive {
     background-color: rgb(40, 111, 129);
     color: white;
 }
 
-
-
-@media (min-width: 768px)  
+@media (min-width: 700px)  
 {
     .mainContainer {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+            'inputTitle outputTitle'
+            'render render';
+    }
+
+    .render {
+        grid-area: render;
+        display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto;
         grid-template-areas: 
-            'input render';
+            'input output';
     }
-    
-    .input {
+
+    .input, .inputTitle {
         max-width: 260px;
     }
 
-    .inputTitle {
-        background-color: rgb(115, 152, 161);
+    .inputTitle, .inputTitleActive {
+        background-color: rgb(40, 111, 129);
+    }
+
+    .inputTitle, .inputTitleActive, .inputTitleInactive {
         color: white;
+        min-width: 260px;
     }
     
-    .renderTitle {
-        background-color: rgb(40, 111, 129);
+    .outputTitle, .outputTitleActive {
+        background-color: rgb(115, 152, 161); 
         color: white;
     }
 }

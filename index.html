@@ -8,43 +8,46 @@
     <link type="text/css" rel="stylesheet" href="style.css" media="all">
 </head>
 <body class="mainContainer">
-    <div class="input">
-        <div class="inputTitle">Input</div>
-        <div class="inputBox">
-            <div class="introOne">Enter number of columns and rows and submit!</div>
-            <div class="colrow">
-                <input type="text" class="col" id="col" placeholder="columns">
-                <br/>
-                <input type="text" class="row" id="row" placeholder="rows">
-                <br/>
-                <button onclick="clearText(); render();">Submit</button>
-                <br/>
-            </div>
-            <div class="introTwo">Customize grid area by adding or changing alphabets.</div>
-            <div class="gridrow">
-                <textarea id="renderGridArea" class="renderGridArea" ></textarea>
-                <br/>
-                <button onclick="render()">Customize</button>
-                <br/>
-            </div>
-            <div class="introThree">Select a letter and enter color to change div colors.</div>
-            <div class="divcolor">
-                <select id="div" ></select>
-                <input type="text" id="backgroundColor" placeholder="background-color">
-                <br/>
-                <button onclick="changeColor()">Customize</button>
-            </div>
-            <div class="introFour">Voila! You can copy the html and css code below to index.html and style.css files to generate your output as a webpage.</div>
-        </div>
-        <div class="codeOutput">
-            <div class="htmlbox"><div class="outputTitle">HTML</div><textarea id="htmlOutputArea" class="htmlOutputArea"></textarea></div>
-            <div class="cssbox"><div class="outputTitle">CSS</div><textarea id="cssOutputArea" class="cssOutputArea"></textarea></div>
-        </div>
-    </div>
+    <div class="inputTitle" id="inputTitle" onclick="inputOnly();">Input</div>
+    <div class="outputTitle" id="outputTitle" onclick="ouputOnly();">Output</div>
     <div class="render">
-        <div class="renderTitle">Output</div>
-        <style id="renderStyleTag"></style>
-        <div class="container" id="container"></div>
+        <div class="input" id="input">
+            <div class="inputBox">
+                <div class="introOne">Enter number of columns and rows and submit!</div>
+                <div class="colrow">
+                    <input type="text" class="col" id="col" placeholder="columns">
+                    <br/>
+                    <input type="text" class="row" id="row" placeholder="rows">
+                    <br/>
+                    <button onclick="clearText(); render();">Submit</button>
+                    <br/>
+                </div>
+                <div class="introTwo">Customize grid area by adding or changing alphabets.</div>
+                <div class="gridrow">
+                    <textarea id="renderGridArea" class="renderGridArea" ></textarea>
+                    <br/>
+                    <button onclick="render()">Customize</button>
+                    <br/>
+                </div>
+                <div class="introThree">Select a letter and enter color to change div colors.</div>
+                <div class="divcolor">
+                    <select id="div" ></select>
+                    <input type="text" id="backgroundColor" placeholder="background-color">
+                    <br/>
+                    <button onclick="changeColor()">Customize</button>
+                </div>
+                <div class="introFour">Voila! You can copy the html and css code below to index.html and style.css files to generate your output as a webpage.</div>
+            </div>
+            <div class="codeOutput">
+                <div class="htmlbox"><div class="codeOutputTitle">HTML</div><textarea id="htmlOutputArea" class="htmlOutputArea"></textarea></div>
+                <div class="cssbox"><div class="codeOutputTitle">CSS</div><textarea id="cssOutputArea" class="cssOutputArea"></textarea></div>
+            </div>
+        </div>
+        <div class="output" id="output">
+            <style id="renderStyleTag"></style>
+            <div class="container" id="container"></div>
+        </div>
     </div>
+    <img src="" onerror="start(this.parentElement);"/>
 </body>
 </html>

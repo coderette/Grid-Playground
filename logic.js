@@ -13,6 +13,64 @@ var rowText = [];
 var alphabet = [];
 var htmlDivs = "";
 
+
+function start() {
+    if (window.innerWidth <= 700) {
+        inputOnly();
+    }
+    else inputAndOutput();
+}
+
+function inputOnly() {
+    if (window.innerWidth <= 700) {
+        var input = document.getElementById("input");
+        var output = document.getElementById("output");
+        var inputTitle = document.getElementById("inputTitle");
+        var outputTitle = document.getElementById("outputTitle");
+
+        input.style.display = "grid";
+        output.style.display = "none";
+        inputTitle.className = "inputTitleActive";
+        outputTitle.className = "outputTitle";
+    }
+    else if (window.innerWidth > 700) {
+        inputAndOutput();
+    } 
+}
+
+function ouputOnly() {
+    if (window.innerWidth <= 700) {
+        var input = document.getElementById("input");
+        var output = document.getElementById("output");
+        var inputTitle = document.getElementById("inputTitle");
+        var outputTitle = document.getElementById("outputTitle");
+
+        input.style.display = "none";
+        output.style.display = "grid";
+        inputTitle.className = "inputTitleInactive";
+        outputTitle.className = "outputTitleActive";
+    }
+    else if (window.innerWidth > 700) {
+        inputAndOutput();
+    } 
+}
+
+function inputAndOutput() {
+    var input = document.getElementById("input");
+    var output = document.getElementById("output");
+    var inputTitle = document.getElementById("inputTitle");
+    var outputTitle = document.getElementById("outputTitle");
+
+    input.style.display = "grid";
+    output.style.display = "grid";
+    inputTitle.className = "inputTitle";
+    outputTitle.className = "outputTitle";
+}
+
+function windowSize() {
+    alert(window.innerWidth);
+}
+
 function render() {
     styles = {};
     col = parseInt(document.getElementById("col").value);
@@ -43,6 +101,10 @@ function render() {
     fillOptions();
     renderHTML();
     renderStyle();
+
+    if (window.innerWidth > 700) {
+        inputAndOutput();
+    }
 }
 
 
