@@ -20,22 +20,12 @@ body
 
 .mainContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto 1fr;
     grid-template-areas: 
-        'inputTitle outputTitle'
-        'render render';
+        'inputTitle outputTitle codeTitle'
+        'render render render';
 }
-
-.render {
-    grid-area: render;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: 
-        'input output';
-}
-
 
 .inputTitle, .inputTitleActive, .inputTitleInactive {
     grid-area: inputTitle;
@@ -44,16 +34,28 @@ body
 .outputTitle, .outputTitleActive {
     grid-area: outputTitle;
 }
+.codeTitle {
+    grid-area: codeTitle;
+}
+
+.render {
+    grid-area: render;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'input output code';
+}
+
 
 .input {
     grid-area: input;
     background-color: rgb(240, 240, 240);
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-        'inputBox'
-        'codeOutput';
+        'inputBox';
 }
 
 .inputBox {
@@ -106,26 +108,21 @@ body
     text-align: center;
 }
 
-.codeOutputTitle, .inputTitle, .outputTitle, .inputTitleActive, .outputTitleActive, .inputTitleInactive {
+.codeOutputTitle, .inputTitle, .outputTitle, .inputTitleActive, .outputTitleActive, .inputTitleInactive, .codeTitle, .codeTitleInactive {
     font-size: 16px;
     padding: 3px;
     text-align: center;
 }
 
-.codeOutput {
-    grid-area: codeOutput;
+.code {
+    background-color: rgb(240, 240, 240);
+    grid-area: code;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
         'hb'
         'cb';
-}
-.cssOutputArea, .htmlOutputArea {
-    width: 100%;
-    height: 75%;
-    margin: 0px;
-    padding: 5px;
 }
 
 .htmlbox {
@@ -136,14 +133,19 @@ body
     grid-area: cb;
 }
 
+.cssOutputArea, .htmlOutputArea {
+    width: 100%;
+    height: 75%;
+    margin: 0px;
+    padding: 5px;
+}
+
+
 .renderGridArea {
     width: 100px;
     min-height: 50px;                
 }
 
-.box {
-    grid-area: b;
-}
 
 .row, .col {
     width: 70px;
@@ -167,7 +169,7 @@ body
     background-color: rgb(248, 248, 248);
 }
 
-.inputTitleInactive {
+.inputTitleInactive, .codeTitleInactive {
     background-color: rgb(115, 152, 161);
     color: white;
 }
@@ -177,7 +179,7 @@ body
     color: white;
 }
 
-.inputTitleActive, .inputTitle, .outputTitleActive {
+.inputTitleActive, .inputTitle, .outputTitleActive, .codeTitle {
     background-color: rgb(40, 111, 129);
     color: white;
 }
@@ -186,31 +188,35 @@ body
 {
     .mainContainer {
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto;
         grid-template-rows: auto 1fr;
         grid-template-areas: 
-            'inputTitle outputTitle'
-            'render render';
+            'inputTitle outputTitle codeTitle' 
+            'render render render';
     }
 
     .render {
         grid-area: render;
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto;
         grid-template-rows: auto;
         grid-template-areas: 
-            'input output';
+            'input output code';
+    }
+
+    .code {
+        min-width: 260px;
     }
 
     .input, .inputTitle {
         max-width: 260px;
     }
 
-    .inputTitle, .inputTitleActive {
+    .inputTitle, .inputTitleActive, .codeTitle {
         background-color: rgb(40, 111, 129);
     }
 
-    .inputTitle, .inputTitleActive, .inputTitleInactive {
+    .inputTitle, .inputTitleActive, .inputTitleInactive, .codeTitle {
         color: white;
         min-width: 260px;
     }

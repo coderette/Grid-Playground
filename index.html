@@ -10,7 +10,8 @@
 <body class="mainContainer">
     <div class="inputTitle" id="inputTitle" onclick="inputOnly();">Input</div>
     <div class="outputTitle" id="outputTitle" onclick="ouputOnly();">Output</div>
-    <div class="render">
+    <div class="codeTitle" id="codeTitle" onclick="codeOnly();">Code</div>
+    <div class="render" id="renderBox">
         <div class="input" id="input">
             <div class="inputBox">
                 <div class="introOne">Enter number of columns and rows and submit!</div>
@@ -38,14 +39,14 @@
                 </div>
                 <div class="introFour">Voila! You can copy the html and css code below to index.html and style.css files to generate your output as a webpage.</div>
             </div>
-            <div class="codeOutput">
-                <div class="htmlbox"><div class="codeOutputTitle">HTML</div><textarea id="htmlOutputArea" class="htmlOutputArea"></textarea></div>
-                <div class="cssbox"><div class="codeOutputTitle">CSS</div><textarea id="cssOutputArea" class="cssOutputArea"></textarea></div>
-            </div>
         </div>
         <div class="output" id="output">
             <style id="renderStyleTag"></style>
             <div class="container" id="container"></div>
+        </div>
+        <div class="code" id="code">
+            <div class="htmlbox"><div class="codeOutputTitle">HTML</div><textarea id="htmlOutputArea" class="htmlOutputArea"></textarea></div>
+            <div class="cssbox"><div class="codeOutputTitle">CSS</div><textarea id="cssOutputArea" class="cssOutputArea"></textarea></div>
         </div>
     </div>
     <img src="" onerror="start(this.parentElement);"/>

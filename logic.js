@@ -18,23 +18,29 @@ function start() {
     if (window.innerWidth <= 700) {
         inputOnly();
     }
-    else inputAndOutput();
+    else showAll();
 }
 
 function inputOnly() {
     if (window.innerWidth <= 700) {
         var input = document.getElementById("input");
         var output = document.getElementById("output");
+        var code = document.getElementById("code");
         var inputTitle = document.getElementById("inputTitle");
         var outputTitle = document.getElementById("outputTitle");
+        var codeTitle = document.getElementById("codeTitle");
+        var renderBox = document.getElementById("renderBox");
 
         input.style.display = "grid";
         output.style.display = "none";
+        code.style.display = "none";
         inputTitle.className = "inputTitleActive";
         outputTitle.className = "outputTitle";
+        codeTitle.className = "codeTitleInactive";
+        renderBox.style.gridTemplateAreas = '"input"';
     }
     else if (window.innerWidth > 700) {
-        inputAndOutput();
+        showAll();
     } 
 }
 
@@ -42,29 +48,66 @@ function ouputOnly() {
     if (window.innerWidth <= 700) {
         var input = document.getElementById("input");
         var output = document.getElementById("output");
+        var code = document.getElementById("code");
         var inputTitle = document.getElementById("inputTitle");
         var outputTitle = document.getElementById("outputTitle");
+        var codeTitle = document.getElementById("codeTitle");
+        var renderBox = document.getElementById("renderBox");
+
 
         input.style.display = "none";
         output.style.display = "grid";
+        code.style.display = "none";
         inputTitle.className = "inputTitleInactive";
         outputTitle.className = "outputTitleActive";
+        codeTitle.className = "codeTitleInactive";
+        renderBox.style.gridTemplateAreas = '"output"';
     }
     else if (window.innerWidth > 700) {
-        inputAndOutput();
+        showAll();
     } 
 }
 
-function inputAndOutput() {
+function codeOnly() {
+    if (window.innerWidth <= 700) {
+        var input = document.getElementById("input");
+        var output = document.getElementById("output");
+        var code = document.getElementById("code");
+        var inputTitle = document.getElementById("inputTitle");
+        var outputTitle = document.getElementById("outputTitle");
+        var codeTitle = document.getElementById("codeTitle");
+        var renderBox = document.getElementById("renderBox");
+
+
+        input.style.display = "none";
+        output.style.display = "none";
+        code.style.display = "grid";
+        inputTitle.className = "inputTitleInactive";
+        outputTitle.className = "outputTitle";
+        codeTitle.className = "codeTitle";
+        renderBox.style.gridTemplateAreas = '"code"';
+    }
+    else if (window.innerWidth > 700) {
+        showAll();
+    } 
+}
+
+function showAll() {
     var input = document.getElementById("input");
     var output = document.getElementById("output");
+    var code = document.getElementById("code");
     var inputTitle = document.getElementById("inputTitle");
     var outputTitle = document.getElementById("outputTitle");
+    var codeTitle = document.getElementById("codeTitle");
+    var renderBox = document.getElementById("renderBox");
 
     input.style.display = "grid";
     output.style.display = "grid";
+    code.style.display = "grid";
     inputTitle.className = "inputTitle";
     outputTitle.className = "outputTitle";
+    codeTitle.className = "codeTitle";
+    renderBox.style.gridTemplateAreas = "input output code";
 }
 
 function windowSize() {
@@ -103,7 +146,7 @@ function render() {
     renderStyle();
 
     if (window.innerWidth > 700) {
-        inputAndOutput();
+        showAll();
     }
 }
 
