@@ -11,6 +11,7 @@ var rows = "";
 var customLetters = [];
 var rowText = [];
 var alphabet = [];
+var htmlDivs = "";
 
 function render() {
     styles = {};
@@ -20,10 +21,12 @@ function render() {
     alphabet = uniqueDivsFun();
     var renderDiv = get("container");
     renderDiv.innerHTML = "";
+    htmlDivs = "";
     for(var i=0; i<uniqueDivs; i++) {
         var content = createDiv(alphabet[i]);
-        renderDiv.innerHTML += content;
+        htmlDivs += content;
     }   
+    renderDiv.innerHTML = htmlDivs;
     for(var i=0; i<uniqueDivs; i++) {
         var attributes = {};
         for(var j=0; j<styleType.length; j++) {
@@ -38,6 +41,7 @@ function render() {
     } 
     setStyle();
     fillOptions();
+    renderHTML();
     renderStyle();
 }
 
@@ -45,7 +49,7 @@ function render() {
 function setStyle() {
     var gridArea = setGridArea(rows);
     var renderStyleTag = get("renderStyleTag");
-    var content = "div.container{\n    display: grid;\n    grid-template-columns: auto;\n    grid-template-rows: auto;    \n    " + gridArea + "}";
+    var content = "div.container\n{\n    display: grid;\n    grid-template-columns: auto;\n    grid-template-rows: auto;    \n    " + gridArea + "}\n";
     var fullContent = content + divStyle();
     style = fullContent;
     renderStyleTag.innerHTML = fullContent;
@@ -54,15 +58,20 @@ function setStyle() {
 
 function divStyle() {
     var start = "\ndiv.";
-    var middle = "{\n    ";
-    var end = "\n}";
+    var middle = "\n{\n    ";
+    var end = "\n}\n";
     var divStyles = "";
     for (let key in styles) {
         var attribute = styles[key];
         var attributes = "";
         for (let key2 in attribute) { 
             var styleDiv = setAttribute(key2, attribute[key2]);
-            attributes += styleDiv + "\n    ";
+            if (key2=="background-color") {
+                attributes += styleDiv;
+            }
+            else {
+                attributes += styleDiv + "\n    ";
+            }
         }        
         var content = start + key + middle + attributes + end;
         divStyles += content;
@@ -204,8 +213,17 @@ function changeColor() {
 
 
 function renderStyle() {
-    var codeOutput = get("codeOutputArea");
-    codeOutput.innerHTML = style;
+    var cssOutput = get("cssOutputArea");
+    var startCss = "*\n{\n    box-sizing: border-box;\n}\n\nhtml\n{\n    height: 100%;\n}\n\nbody, .container\n{\n    min-height: 100%;\n    height: 100%;\n    margin: 0px;\n    padding: 0px;\n    border: none;\n}\n\n";
+    cssOutput.innerHTML = startCss + style;
+}
+
+function renderHTML() {
+    var htmlOutput = get("htmlOutputArea");
+    var starthtml = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n    <meta charset='utf-8'>\n    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n    <title>Grid Playground</title>\n    <script type='text/javascript' src='logic.js'></script>\n    <link type='text/css' rel='stylesheet' href='style.css' media='all'>\n</head>\n<body class='mainContainer'>\n    <div class='container'>";
+    var endhtml = "\n    </div>\n</body>\n</html>";
+    var fullhtml = starthtml + "    " + htmlDivs + endhtml;
+    htmlOutput.innerHTML = fullhtml;
 }
 
 
@@ -226,7 +244,7 @@ function createTagContent(type, content) {
 
 
 function createDiv(name) {
-    var tagStart = "<div class='";
+    var tagStart = "\n        <div class='";
     var tagId = "' id='";
     var tagEnd = "'></div>";
     var tagWhole = tagStart + name + tagId + name + tagEnd;

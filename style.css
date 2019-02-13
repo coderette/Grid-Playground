@@ -20,14 +20,17 @@ body
 
 .mainContainer {
     display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
     grid-template-areas: 
-        's r';
+        's'
+        'r';
 }
 
 
 .sidebar {
+    padding: 2px;
+    background-color: rgb(240, 240, 240);
     grid-area: s;
     display: grid;
     grid-template-columns: auto;
@@ -40,48 +43,126 @@ body
 .inputBox {
     grid-area: i;
     text-align: center;
-    margin: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'title title'
+        'introOne introTwo'
+        'cr gr'
+        'introThree introThree'
+        'dc dc'
+        'introFour introFour';
+}
+
+.inputTitle {
+    grid-area: title;
+    font-size: 18px;
+    padding: 3px;
+}
+
+.introOne {
+    grid-area: introOne;
+}
+
+.colrow {
+    grid-area: cr;
+}
+
+.introTwo {
+    grid-area: introTwo;
+}
+
+.gridrow {
+    grid-area: gr;
+}
+
+.introThree {
+    grid-area: introThree;
+}
+
+.divcolor {
+    grid-area: dc;
+}
+
+.introFour {
+    grid-area: introFour;
+}
+
+.introOne, .introTwo, .introThree, .introFour {
+    font-size: 12px;
+    padding: 10px;
+    color: rgb(61, 141, 141);
+    text-align: center;
+}
+
+.outputTitle {
+    font-size: 16px;
+    padding: 3px;
+    text-align: center;
 }
 
 .codeOutput {
     grid-area: c;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-        't'
-        'b';
+        'hb'
+        'cb';
+}
+.cssOutputArea, .htmlOutputArea {
+    width: 100%;
+    height: 75%;
+    margin: 0px;
+    padding: 5px;
+}
+
+.htmlbox {
+    grid-area: hb;
+}
+
+.cssbox {
+    grid-area: cb;
 }
 
 .container {
     grid-area: r;
-    background-color: aquamarine;
+    background-color: rgb(248, 248, 248);
 }
 
 .renderGridArea {
-    width: 120px;
-    height: fit-content;                
+    width: 100px;
+    min-height: 50px;                
 }
 
-.codeOutputArea {
-    width: 100%;
-    height: 99.5%;
-    margin: 0px;
-    padding: 0px;
-}
 
-.title {
-    grid-area: t;
-}
 
 .box {
     grid-area: b;
 }
 
 .row, .col {
-    width: 100px;
+    width: 70px;
+    height: 24px;
+    margin: 2px;
+    text-align: center;
 }
 
 p {
     text-align: center;
 }
+
+@media (min-width: 768px)  
+{
+    .mainContainer {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            's r';
+    }
+    .sidebar {
+        max-width: 260px;
+    }
+}
+
