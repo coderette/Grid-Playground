@@ -37,6 +37,7 @@ function inputOnly() {
         inputTitle.className = "inputTitleActive";
         outputTitle.className = "outputTitle";
         codeTitle.className = "codeTitleInactive";
+        renderBox.style.gridTemplateColumns = "auto";
         renderBox.style.gridTemplateAreas = '"input"';
     }
     else if (window.innerWidth > 700) {
@@ -61,6 +62,7 @@ function ouputOnly() {
         inputTitle.className = "inputTitleInactive";
         outputTitle.className = "outputTitleActive";
         codeTitle.className = "codeTitleInactive";
+        renderBox.style.gridTemplateColumns = "auto";
         renderBox.style.gridTemplateAreas = '"output"';
     }
     else if (window.innerWidth > 700) {
@@ -85,6 +87,7 @@ function codeOnly() {
         inputTitle.className = "inputTitleInactive";
         outputTitle.className = "outputTitle";
         codeTitle.className = "codeTitle";
+        renderBox.style.gridTemplateColumns = "auto";
         renderBox.style.gridTemplateAreas = '"code"';
     }
     else if (window.innerWidth > 700) {
@@ -107,11 +110,78 @@ function showAll() {
     inputTitle.className = "inputTitle";
     outputTitle.className = "outputTitle";
     codeTitle.className = "codeTitle";
-    renderBox.style.gridTemplateAreas = "input output code";
+    renderBox.style.gridTemplateColumns = "auto 1fr auto";
+    renderBox.style.gridTemplateAreas = ' "input output code" ';
 }
 
 function windowSize() {
     alert(window.innerWidth);
+}
+
+function increase(id) {
+    var oldCol, oldRow;
+    var colEl = document.getElementById("col");
+    var rowEl = document.getElementById("row");
+    if (id=="colUp" && colEl.value=="") {
+        oldCol = 0;
+        oldCol++;
+        colEl.value = oldCol;
+    }
+    else if (id=="colUp" && colEl.value!="") 
+    {        
+        oldCol = parseInt(colEl.value);
+        if (id=="colUp" && oldCol!=NaN) 
+        {
+            oldCol++;
+            document.getElementById("col").value = oldCol;
+            clearText();
+            render();
+        }
+    }
+    if (id=="rowUp" && rowEl.value=="") {
+        oldRow = 0;
+        oldRow++;
+        rowEl.value = oldRow;
+    }
+    else if (id=="rowUp" && rowEl.value!="") 
+    {        
+        oldRow = parseInt(rowEl.value);
+        if (id=="rowUp" && oldRow!=NaN) 
+        {
+            oldRow++;
+            document.getElementById("row").value = oldRow;
+            clearText();
+            render();
+        }
+    }
+}
+
+function decrease(id) {
+    var oldCol, oldRow;
+    var colEl = document.getElementById("col");
+    var rowEl = document.getElementById("row");
+    if (id=="colDown" && colEl.value!="") 
+    {        
+        oldCol = parseInt(colEl.value);
+        if (id=="colDown" && oldCol>1 && oldCol!=NaN) 
+        {
+            oldCol--;
+            document.getElementById("col").value = oldCol;
+            clearText();
+            render();
+        }
+    }
+    if (id=="rowDown" && rowEl.value!="") 
+    {        
+        oldRow = parseInt(rowEl.value);
+        if (id=="rowDown" && oldRow>1 && oldRow!=NaN) 
+        {
+            oldRow--;
+            document.getElementById("row").value = oldRow;
+            clearText();
+            render();
+        }
+    }
 }
 
 function render() {

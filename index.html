@@ -14,16 +14,17 @@
     <div class="render" id="renderBox">
         <div class="input" id="input">
             <div class="inputBox">
-                <div class="introOne">Enter number of columns and rows and submit!</div>
+                <div class="introOne">Enter number of columns and rows and submit to see your divs in a grid!</div>
                 <div class="colrow">
-                    <input type="text" class="col" id="col" placeholder="columns">
-                    <br/>
-                    <input type="text" class="row" id="row" placeholder="rows">
-                    <br/>
-                    <button onclick="clearText(); render();">Submit</button>
-                    <br/>
+                    <div class="colInput"><input type="text" class="col" id="col" placeholder="columns"></div>
+                    <div class="colUp" id="colUp" onclick="increase(this.id)"><div class="spanUp">&#9664;</div></div>
+                    <div class="colDown" id="colDown" onclick="decrease(this.id)"><div class="spanDown">&#9654;</div></div>
+                    <div class="rowInput"><input type="text" class="row" id="row" placeholder="rows"></div>
+                    <div class="rowUp" id="rowUp" onclick="increase(this.id)"><div class="spanUp">&#9664;</div></div>
+                    <div class="rowDown" id="rowDown" onclick="decrease(this.id)"><div class="spanDown">&#9654;</div></div>
+                    <div class="submit"><button onclick="clearText(); render();">Submit</button></div>
                 </div>
-                <div class="introTwo">Customize grid area by adding or changing alphabets.</div>
+                <div class="introTwo">Customize grid area by adding or changing alphabets. Don't forget to add space between alphabets.</div>
                 <div class="gridrow">
                     <textarea id="renderGridArea" class="renderGridArea" ></textarea>
                     <br/>
@@ -33,11 +34,11 @@
                 <div class="introThree">Select a letter and enter color to change div colors.</div>
                 <div class="divcolor">
                     <select id="div" ></select>
-                    <input type="text" id="backgroundColor" placeholder="background-color">
+                    <input type="text" autocapitalize="none" class="backgroundColor" id="backgroundColor" placeholder="background-color">
                     <br/>
                     <button onclick="changeColor()">Customize</button>
                 </div>
-                <div class="introFour">Voila! You can copy the html and css code below to index.html and style.css files to generate your output as a webpage.</div>
+                <div class="introFour">Voila! You can copy the html and css code to index.html and style.css files to generate your output as a webpage.</div>
             </div>
         </div>
         <div class="output" id="output">

@@ -62,14 +62,18 @@ body
     grid-area: inputBox;
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
-        'introOne introTwo'
-        'cr gr'
-        'introThree introThree'
-        'dc dc'
-        'introFour introFour';
+        'introOne'
+        'colrow' 
+        'introTwo'
+        'gridrow'
+        'introThree'
+        'divcolor'
+        'introFour';
 }
 
 
@@ -78,7 +82,83 @@ body
 }
 
 .colrow {
-    grid-area: cr;
+    grid-area: colrow;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat (4, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'colInput colUp rowInput rowUp'
+        'colInput colDown rowInput rowDown'
+        'submit submit submit submit';
+}
+
+.colInput {
+    grid-area: colInput;
+}
+
+.colUp {
+    grid-area: colUp;
+}
+
+.colDown {
+    grid-area: colDown;
+}
+
+.rowInput {
+    grid-area: rowInput;
+}
+
+.rowUp {
+    grid-area: rowUp;
+}
+
+.rowDown {
+    grid-area: rowDown;
+}
+
+.submit {
+    grid-area: submit;
+    margin-top: 5px;
+}
+
+.colUp, .colDown, .rowUp, .rowDown {
+    font-size: 9px;
+    height: 16px;
+    width: 18px;
+    text-align: center;
+    align-content: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: none;
+    color: transparent;
+    text-shadow: 0 0 0 rgb(255, 255, 255);
+    background-color: rgb(40, 111, 129);
+    margin-left: 2px; 
+    margin-right: 2px; 
+}
+
+.colUp:active, .colDown:active, .rowUp:active, .rowDown:active {
+    color: transparent;
+    text-shadow: 0 0 0 rgb(255, 255, 255);
+    background-color: rgb(84, 123, 133);
+}
+
+.colUp:hover, .colDown:hover, .rowUp:hover, .rowDown:hover {
+    cursor: pointer;
+}
+
+.colUp, .colDown {
+    margin-right: 25px; 
+}
+
+.spanUp {
+    transform: rotate(-270deg);
+}
+
+.spanDown {
+    transform: rotate(90deg);
 }
 
 .introTwo {
@@ -86,7 +166,7 @@ body
 }
 
 .gridrow {
-    grid-area: gr;
+    grid-area: gridrow;
 }
 
 .introThree {
@@ -94,7 +174,7 @@ body
 }
 
 .divcolor {
-    grid-area: dc;
+    grid-area: divcolor;
 }
 
 .introFour {
@@ -103,9 +183,14 @@ body
 
 .introOne, .introTwo, .introThree, .introFour {
     font-size: 12px;
-    padding: 10px;
+    padding: 20px;
     color: rgb(61, 141, 141);
     text-align: center;
+    align-self: end;
+}
+
+.introFour {
+    align-self: center;
 }
 
 .codeOutputTitle, .inputTitle, .outputTitle, .inputTitleActive, .outputTitleActive, .inputTitleInactive, .codeTitle, .codeTitleInactive {
@@ -118,6 +203,7 @@ body
     background-color: rgb(240, 240, 240);
     grid-area: code;
     display: grid;
+    padding-top: 8px;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
@@ -127,19 +213,24 @@ body
 
 .htmlbox {
     grid-area: hb;
+    color: rgb(40, 111, 129);
 }
 
 .cssbox {
     grid-area: cb;
+    color: rgb(40, 111, 129);
 }
 
 .cssOutputArea, .htmlOutputArea {
     width: 100%;
-    height: 75%;
+    height: 85%;
     margin: 0px;
     padding: 5px;
 }
 
+.backgroundColor {
+    width: 110px;
+}
 
 .renderGridArea {
     width: 100px;
@@ -149,8 +240,8 @@ body
 
 .row, .col {
     width: 70px;
-    height: 24px;
-    margin: 2px;
+    height: 40px;
+    margin: 0px;
     text-align: center;
 }
 
@@ -213,16 +304,17 @@ body
     }
 
     .inputTitle, .inputTitleActive, .codeTitle {
-        background-color: rgb(40, 111, 129);
+        background-color: rgb(115, 152, 161); 
     }
 
-    .inputTitle, .inputTitleActive, .inputTitleInactive, .codeTitle {
+    .inputTitle, .inputTitleActive, .inputTitleInactive, .codeTitle, .codeTitleInactive {
         color: white;
         min-width: 260px;
+        text-align: center;
     }
     
     .outputTitle, .outputTitleActive {
-        background-color: rgb(115, 152, 161); 
+        background-color: rgb(40, 111, 129);
         color: white;
     }
 }
