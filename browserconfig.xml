@@ -3,7 +3,7 @@
     <msapplication>
         <tile>
             <square150x150logo src="https://coderette.github.io/grid-playground/mstile-150x150.png"/>
-            <TileColor>#00aba9</TileColor>
+            <TileColor>#00bcbc</TileColor>
         </tile>
     </msapplication>
 </browserconfig>
