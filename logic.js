@@ -130,7 +130,7 @@ function increase(id) {
     else if (id=="colUp" && colEl.value!="") 
     {        
         oldCol = parseInt(colEl.value);
-        if (id=="colUp" && oldCol!=NaN) 
+        if (id=="colUp" && oldCol<7 && oldCol!=NaN) 
         {
             oldCol++;
             document.getElementById("col").value = oldCol;
@@ -146,7 +146,7 @@ function increase(id) {
     else if (id=="rowUp" && rowEl.value!="") 
     {        
         oldRow = parseInt(rowEl.value);
-        if (id=="rowUp" && oldRow!=NaN) 
+        if (id=="rowUp" && oldRow<7 && oldRow!=NaN) 
         {
             oldRow++;
             document.getElementById("row").value = oldRow;
