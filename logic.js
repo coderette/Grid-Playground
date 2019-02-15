@@ -133,7 +133,7 @@ function increase(id) {
         oldRow = parseInt(rowEl.value);
         if (id=="colUp" && oldCol!=NaN) 
         {
-            if (oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
+            if (oldRow==NaN || oldCol*oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
                 oldCol++;
                 document.getElementById("col").value = oldCol;
                 clearText();
@@ -152,7 +152,7 @@ function increase(id) {
         oldRow = parseInt(rowEl.value);
         if (id=="rowUp" && oldRow!=NaN) 
         {
-            if (oldCol==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
+            if (oldCol==NaN || oldCol*oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
                 oldRow++;
                 document.getElementById("row").value = oldRow;
                 clearText();
