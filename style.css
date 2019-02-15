@@ -29,13 +29,16 @@ body
 
 .inputTitle, .inputTitleActive, .inputTitleInactive {
     grid-area: inputTitle;
+    height: 45px; 
 }
 
 .outputTitle, .outputTitleActive {
     grid-area: outputTitle;
+    height: 45px;
 }
 .codeTitle {
     grid-area: codeTitle;
+    height: 45px;
 }
 
 .render {
@@ -263,16 +266,19 @@ body
 .inputTitleInactive, .codeTitleInactive {
     background-color: rgb(115, 152, 161);
     color: white;
+    padding-top: 10px;
 }
 
 .outputTitle {
     background-color: rgb(115, 152, 161);
     color: white;
+    padding-top: 10px;
 }
 
 .inputTitleActive, .inputTitle, .outputTitleActive, .codeTitle {
     background-color: rgb(40, 111, 129);
     color: white;
+    padding-top: 10px;
 }
 
 @media (min-width: 700px)  
@@ -311,11 +317,13 @@ body
         color: white;
         min-width: 260px;
         text-align: center;
+        padding-top: 10px;
     }
     
     .outputTitle, .outputTitleActive {
         background-color: rgb(40, 111, 129);
         color: white;
+        padding-top: 10px;
     }
 }
 
