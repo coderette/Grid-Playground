@@ -401,7 +401,7 @@ function renderStyle() {
 
 function renderHTML() {
     var htmlOutput = get("htmlOutputArea");
-    var starthtml = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n    <meta charset='utf-8'>\n    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n    <title>Grid Playground</title>\n    <script type='text/javascript' src='logic.js'></script>\n    <link type='text/css' rel='stylesheet' href='style.css' media='all'>\n</head>\n<body class='mainContainer'>\n    <div class='container'>";
+    var starthtml = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n    <meta charset='utf-8'>\n    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n    <title>Grid Playground</title>\n    <link type='text/css' rel='stylesheet' href='style.css' media='all'>\n</head>\n<body class='mainContainer'>\n    <div class='container'>";
     var endhtml = "\n    </div>\n</body>\n</html>";
     var fullhtml = starthtml + "    " + htmlDivs + endhtml;
     htmlOutput.innerHTML = fullhtml;
