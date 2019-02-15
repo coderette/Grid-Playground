@@ -3,7 +3,7 @@ var row = 0;
 var uniqueDivs = 0;
 var renderDiv = document.getElementById("container");
 var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "za", "zb", "zc", "zd", "ze", "zf", "zg", "zh", "zi", "zj", "zk", "zl", "zm", "zn", "zo", "zp", "zq", "zr", "zs", "zt", "zu", "zv", "zw", "zx", "zy", "zz"];
-var color = ["red", "orange", "yellow", "green", "teal", "blue", "indigo", "violet", "purple", "silver", "gray", "black", "navy", "blueviolet", "darksalmon", "brown", "chocolate", "coral", "magenta", "crimson", "darkcyan", "darkgoldenrod", "darkorchid", "forestgreen", "dodgerblue", "darkred", "gold", "darkgreen", "darkblue", "darkmagenta", "darkolivegreen", "deeppink", "deepskyblue", "lightyellow", "lightgreen", "lightblue", "palegreen", "palevioletred", "peru", "saddlebrown", "salmon", "seagreen", "skyblue", "beige", "burlywood", "chartreuse", "darkkhaki", "firebrick", "darkslateblue", "hotpink", "khaki", "lime", "royalblue", "midnightblue"];
+var color = ["green", "yellow", "red", "teal", "crimson", "orange", "blue", "indigo", "violet", "purple", "silver", "gray", "lightgreen", "navy", "blueviolet", "darksalmon", "brown", "chocolate", "coral", "magenta", "aqua", "darkcyan", "darkgoldenrod", "darkorchid", "forestgreen", "dodgerblue", "darkred", "gold", "darkgreen", "darkblue", "darkmagenta", "darkolivegreen", "deeppink", "deepskyblue", "lightyellow", "lightgreen", "lightblue", "palegreen", "palevioletred", "peru", "saddlebrown", "salmon", "seagreen", "skyblue", "beige", "burlywood", "chartreuse", "darkkhaki", "firebrick", "darkslateblue", "hotpink", "khaki", "lime", "royalblue", "midnightblue"];
 var styleType = ["grid-area", "background-color"]
 var styles = {};
 var style = "";
@@ -122,42 +122,51 @@ function increase(id) {
     var oldCol, oldRow;
     var colEl = document.getElementById("col");
     var rowEl = document.getElementById("row");
-    if (id=="colUp" && colEl.value=="") {
-        oldCol = 0;
-        oldCol++;
+    if (id=="colUp" && colEl.value=="" && rowEl.value=="") {
+        oldCol = 1;
         colEl.value = oldCol;
+    }
+    else if (id=="colUp" && colEl.value=="" && rowEl.value!="") {
+        oldCol = 1;
+        colEl.value = oldCol;
+        oldRow = parseInt(rowEl.value);
+        document.getElementById("col").value = oldCol;
+        document.getElementById("row").value = oldRow;
+        clearText();
+        render();
     }
     else if (id=="colUp" && colEl.value!="") 
     {        
         oldCol = parseInt(colEl.value);
         oldRow = parseInt(rowEl.value);
-        if (id=="colUp" && oldCol!=NaN) 
-        {
-            if (oldRow==NaN || oldCol*oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
-                oldCol++;
-                document.getElementById("col").value = oldCol;
-                clearText();
-                render();
-            }
+        if (isNaN(oldRow) || ((oldCol+1)*(oldRow+1)<=52)) {
+            oldCol++;
+            document.getElementById("col").value = oldCol;
+            clearText();
+            render();
         }
     }
-    if (id=="rowUp" && rowEl.value=="") {
-        oldRow = 0;
-        oldRow++;
+    if (id=="rowUp" && rowEl.value=="" && colEl.value=="") {
+        oldRow = 1;
         rowEl.value = oldRow;
+    }
+    else if (id=="rowUp" && rowEl.value=="" && colEl.value!="") {
+        oldRow = 1;
+        oldCol = parseInt(colEl.value);
+        document.getElementById("col").value = oldCol;
+        document.getElementById("row").value = oldRow;
+        clearText();
+        render();
     }
     else if (id=="rowUp" && rowEl.value!="") 
     {        
         oldCol = parseInt(colEl.value);
         oldRow = parseInt(rowEl.value);
-        if (id=="rowUp" && oldRow!=NaN) 
-        {
-            if (oldCol==NaN || oldCol*oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
-                oldRow++;
-                document.getElementById("row").value = oldRow;
-                clearText();
-                render();
-            }
+        if (isNaN(oldCol) || ((oldCol+1)*(oldRow+1)<=52)) {
+            oldRow++;
+            document.getElementById("row").value = oldRow;
+            clearText();
+            render();
         }
     }
 }

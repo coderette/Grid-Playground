@@ -236,8 +236,8 @@ body
 }
 
 .renderGridArea {
-    width: 100px;
-    min-height: 50px;                
+    width: 150px;
+    min-height: 70px;                
 }
 
 
@@ -246,6 +246,10 @@ body
     height: 40px;
     margin: 0px;
     text-align: center;
+}
+
+.row:hover, .col:hover {
+    cursor: pointer;
 }
 
 .output {
