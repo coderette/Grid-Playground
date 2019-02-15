@@ -120,8 +120,10 @@ function showAll() {
     renderBox.style.gridTemplateAreas = ' "input output code" ';
 }
 
-function windowSize() {
-    alert(window.innerWidth);
+function customize(e) {
+    if (e.key == "Enter") {
+        changeColor();
+    }
 }
 
 function increase(id) {
