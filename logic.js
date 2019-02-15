@@ -15,10 +15,16 @@ var htmlDivs = "";
 
 
 function start() {
+    increase("colUp");
+    increase("rowUp");
+    increase("rowUp");
+    render();
     if (window.innerWidth <= 700) {
         inputOnly();
     }
-    else showAll();
+    else {
+        showAll();
+    }
 }
 
 function inputOnly() {
@@ -198,6 +204,7 @@ function decrease(id) {
         }
     }
 }
+
 
 function render() {
     styles = {};
