@@ -130,12 +130,15 @@ function increase(id) {
     else if (id=="colUp" && colEl.value!="") 
     {        
         oldCol = parseInt(colEl.value);
-        if (id=="colUp" && oldCol<7 && oldCol!=NaN) 
+        oldRow = parseInt(rowEl.value);
+        if (id=="colUp" && oldCol!=NaN) 
         {
-            oldCol++;
-            document.getElementById("col").value = oldCol;
-            clearText();
-            render();
+            if (oldRow==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
+                oldCol++;
+                document.getElementById("col").value = oldCol;
+                clearText();
+                render();
+            }
         }
     }
     if (id=="rowUp" && rowEl.value=="") {
@@ -145,13 +148,16 @@ function increase(id) {
     }
     else if (id=="rowUp" && rowEl.value!="") 
     {        
+        oldCol = parseInt(colEl.value);
         oldRow = parseInt(rowEl.value);
-        if (id=="rowUp" && oldRow<7 && oldRow!=NaN) 
+        if (id=="rowUp" && oldRow!=NaN) 
         {
-            oldRow++;
-            document.getElementById("row").value = oldRow;
-            clearText();
-            render();
+            if (oldCol==NaN || (oldRow!=NaN && (oldCol+1)*(oldRow+1)<=52)) {
+                oldRow++;
+                document.getElementById("row").value = oldRow;
+                clearText();
+                render();
+            }
         }
     }
 }
