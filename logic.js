@@ -15,10 +15,17 @@ var htmlDivs = "";
 
 
 function start() {
-    increase("colUp");
-    increase("rowUp");
-    increase("rowUp");
-    render();
+    var colStart = document.getElementById("col");
+    var rowStart = document.getElementById("row");
+    if (colStart.value=="" && rowStart.value=="") 
+    {
+        increase("colUp");
+        increase("rowUp");
+        increase("rowUp");
+        render();
+    }
+    else render();
+    
     if (window.innerWidth <= 700) {
         inputOnly();
     }
