@@ -21,6 +21,7 @@ function start() {
     {
         increase("colUp");
         increase("rowUp");
+        increase("rowUp");        
         increase("rowUp");
         render();
     }
